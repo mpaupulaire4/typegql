@@ -1,0 +1,29 @@
+{
+  "name": "typed-gql",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon ./src/index.ts --exec ts-node",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^8.0.2",
+    "typescript": "^3.3.3"
+  },
+  "dependencies": {
+    "graphql-subscriptions": "^1.0.0",
+    "typedi": "^0.8.0"
+  },
+  "peerDependencies": {
+    "reflect-metadata": "^0.1.13"
+  },
+  "nodemonConfig": {
+    "ext": "ts",
+    "events": {
+      "start": "node -e 'console.clear()'"
+    }
+  }
+}
