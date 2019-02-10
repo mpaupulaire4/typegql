@@ -1,39 +1,18 @@
 import 'reflect-metadata'
-import { Controller, Query, Mutation, Subscription } from './Decorators'
+import { Resolve, Resolver } from './Decorators'
 import { BuildResolvers } from './ResolverBuilder'
 import { Metadata } from './Metadata';
 import { PubSub } from 'graphql-subscriptions';
 
-@Controller()
+@Resolver('Test')
 export class Test {
-
-  @Query()
+  @Resolve()
   query() {
     console.log('Test')
   }
 
-  @Mutation()
-  mutation() {
-    console.log('Test')
-  }
-
-  @Subscription()
-  subscription() {
-    console.log('Test')
-  }
-
-  @Query()
+  @Resolve()
   static queryStatic() {
-    console.log('Test')
-  }
-
-  @Mutation()
-  static mutationStatic() {
-    console.log('Test')
-  }
-
-  @Subscription()
-  static subscriptionStatic() {
     console.log('Test')
   }
 }

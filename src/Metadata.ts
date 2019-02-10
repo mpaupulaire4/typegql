@@ -2,8 +2,8 @@ import { RootResolver, TypeResolver } from './types'
 import { PubSubEngine } from 'graphql-subscriptions'
 
 export class Metadata {
-  static controllers: Function[] = []
   static actions: Action[] = []
+  static resolves: ResolveData[] = []
   static pubsub: PubSubEngine
 }
 
@@ -12,6 +12,10 @@ interface BaseAction {
   static: boolean,
   methodName: string,
   name: string,
+}
+
+type ResolveData = BaseAction & {
+  parent: string
 }
 
 type QueryAction = BaseAction & {

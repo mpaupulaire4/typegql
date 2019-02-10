@@ -17,6 +17,7 @@
       "resolveJsonModule" : true,
       "forceConsistentCasingInFileNames": true,
       "noImplicitAny": true,
+      "downlevelIteration": true,
       "noImplicitReturns": true,
       "noUnusedLocals": true,
       "noUnusedParameters": true,
