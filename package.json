@@ -14,11 +14,12 @@
     "typescript": "^3.3.3"
   },
   "dependencies": {
-    "graphql-subscriptions": "^1.0.0",
-    "typedi": "^0.8.0"
+    "dataloader": "^1.4.0",
+    "graphql-subscriptions": "^1.0.0"
   },
   "peerDependencies": {
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "typedi": "^0.8.0"
   },
   "nodemonConfig": {
     "ext": "ts",

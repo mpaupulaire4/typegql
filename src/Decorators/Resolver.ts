@@ -1,29 +1,25 @@
 import { Metadata } from '../Metadata'
+
 const TypesMetadataKey = Symbol("types")
 
 type ResolverDecoratorOptions = string | {
   name: string
 }
 
-type ResolveDecoratorOptions = string | {
+type ResolveDecoratorOptions = {
   name: string
-}
-
-interface MethodInfo {
-  target: any,
-  methodName: string,
-  name: string,
-  static: boolean,
+  dataloader?: boolean
+  key?: (info: {oarent: any, args: any}) => string
 }
 
 export function Resolver(options: ResolverDecoratorOptions) {
   return (target: any) => {
-    const types: Map<string, MethodInfo> = Reflect.getMetadata(TypesMetadataKey, target)
+    const types: Map<string, any> = Reflect.getMetadata(TypesMetadataKey, target)
     if (!types) return
     for (let data of types.values()) {
       Metadata.resolves.push({
-        parent: typeof options == 'string' ? options : options.name,
         ...data,
+        parent: typeof options == 'string' ? options : options.name,
       })
     }
     Reflect.deleteMetadata(TypesMetadataKey, target)
@@ -34,15 +30,17 @@ export function Resolve(options?: ResolveDecoratorOptions) {
   return (target: any, methodName: string) => {
     const isStatic = !!target.prototype
     let constructor = isStatic ? target : target.constructor
-    const types: Map<string, MethodInfo> = Reflect.getMetadata(TypesMetadataKey, constructor) || new Map()
+    const types: Map<string, any> = Reflect.getMetadata(TypesMetadataKey, constructor) || new Map()
+    const name = options ? options.name : methodName
 
-    const name = options ? typeof options === 'string' ? options : options.name : methodName
     Reflect.defineMetadata(
       TypesMetadataKey,
       types.set(name, {
         target,
         methodName,
         name,
+        dataloader: options && options.dataloader,
+        key: options && options.dataloader && options.key ,
         static: isStatic,
       }),
       constructor

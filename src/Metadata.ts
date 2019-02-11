@@ -15,7 +15,10 @@ interface BaseAction {
 }
 
 type ResolveData = BaseAction & {
+  target: TypeResolver
   parent: string
+  dataloader?: boolean
+  key?: (info: {oarent: any, args: any}) => string
 }
 
 type QueryAction = BaseAction & {

@@ -1,6 +1,6 @@
 import { BuildActionResolvers } from './BuildActionResolvers'
+import { BuildResolveResolvers } from './BuildResolveResolvers'
 
 export function BuildResolvers() {
-  const resolvers =  BuildActionResolvers()
-  return resolvers
+  return BuildActionResolvers(BuildResolveResolvers())
 }

@@ -1,5 +1,5 @@
-import { Metadata, ActionType } from '../Metadata'
 import { withFilter } from 'graphql-subscriptions'
+import { Metadata, ActionType } from '../Metadata'
 import { TypeResolver, RootResolver, SubscriptionResolver } from '../types'
 
 interface Resolver {
@@ -9,7 +9,7 @@ interface Resolver {
 }
 
 export function BuildActionResolvers(base: any = {}): Resolver {
-  const resolvers =  Metadata.actions.reduce((resolver, action) => {
+  return Metadata.actions.reduce((resolver, action) => {
     resolver[action.type] = resolver[action.type] || {}
     switch(action.type) {
       case ActionType.Query:
@@ -50,5 +50,4 @@ export function BuildActionResolvers(base: any = {}): Resolver {
         return resolver
     }
   }, base as Resolver)
-  return resolvers
 }
