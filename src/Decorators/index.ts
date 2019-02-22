@@ -1,4 +1,6 @@
 export * from './Query'
 export * from './Mutation'
 export * from './Subscription'
-export * from './Resolver'
+export * from './Resolve'
+export * from './Type'
+export * from './Prop'

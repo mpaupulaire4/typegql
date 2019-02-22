@@ -1,48 +1,25 @@
 import 'reflect-metadata'
-import { Resolve, Resolver, Query, Mutation, Subscription } from './Decorators'
+import { Prop, Type } from './Decorators'
 import { BuildResolvers } from './ResolverBuilder'
 import { Metadata } from './Metadata';
 import { PubSub } from 'graphql-subscriptions';
 
+
+@Type('Test')
 export class Test {
-  @Query()
-  query() {
-    console.log('Test')
-  }
-  @Query()
-  static queryStatic() {
-    console.log('Test Static')
-  }
-  @Mutation()
-  mute() {
-    console.log('Test')
-  }
-  @Mutation()
-  static muteStatic() {
-    console.log('Test Static')
-  }
-  @Subscription()
-  sub() {
-    console.log('Test')
-  }
-  @Subscription()
-  static subStatic() {
-    console.log('Test Static')
-  }
+  @Prop() name: string;
+  @Prop() number: number;
+  @Prop('Test2') classType: Test2;
 }
 
-@Resolver('Test')
+@Type('Test2')
 export class Test2 {
-  @Resolve()
-  query() {
-    console.log('Test')
-  }
-
-  @Resolve()
-  static queryStatic() {
-    console.log('Test Static')
-  }
+  @Prop() name: string;
+  @Prop() number: number;
+  @Prop() classType: Test;
 }
+
+console.log(Metadata.types.join('\n'))
 
 Metadata.pubsub = new PubSub()
-console.log(BuildResolvers())
+BuildResolvers()
