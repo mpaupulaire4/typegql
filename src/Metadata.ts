@@ -5,6 +5,9 @@ export class Metadata {
   static actions: Action[] = []
   static resolves: ResolveData[] = []
   static types: string[] = []
+  static queries: string[] = []
+  static mutations: string[] = []
+  static subscriptions: string[] = []
   static pubsub: PubSubEngine
 }
 
