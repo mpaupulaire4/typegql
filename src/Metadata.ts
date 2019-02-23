@@ -4,7 +4,7 @@ import { PubSubEngine } from 'graphql-subscriptions'
 export class Metadata {
   static actions: Action[] = []
   static resolves: ResolveData[] = []
-  static types: string[] = []
+  static types: Map<string, string[]> = new Map()
   static queries: string[] = []
   static mutations: string[] = []
   static subscriptions: string[] = []

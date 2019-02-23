@@ -1,36 +1,22 @@
 import 'reflect-metadata'
-import { Prop, Type, Mutation, Subscription } from './Decorators'
-import { BuildResolvers } from './ResolverBuilder'
+import { Prop, Type, Resolve, Query, Mutation, Subscription } from './Decorators'
+import { GenerateTypes } from './TypeGenerator'
+import { BuildResolvers } from './ResolverBuilder';
 import { Metadata } from './Metadata';
 import { PubSub } from 'graphql-subscriptions';
 
-
 @Type('Test')
-export class Test {
+export class Test1 {
   @Prop() name: string;
   @Prop() number: number;
   @Prop('Test2') classType: Test2;
 }
 
-@Type('Test2')
+@Type('Test')
 export class Test2 {
-  @Prop() name: string;
-  @Prop() number: number;
-  @Prop() classType: Test;
 
-  @Mutation({
-    name: 'getData',
-    type: 'Data',
-    args: {
-      input: 'DataInput',
-      input2: 'DataInput'
-    }
-  })
-  mutation() {
-    return ''
-  }
-  @Subscription({
-    name: 'sub',
+  @Resolve({
+    name: 'data',
     type: 'Data',
     args: {
       input: 'DataInput',
@@ -40,9 +26,47 @@ export class Test2 {
   query() {
     return ''
   }
+
+  @Resolve({
+    name: 'sub',
+    type: 'Data',
+    args: {
+      input: 'DataInput',
+      input2: 'DataInput'
+    }
+  })
+  sub() {
+    return ''
+  }
 }
 
-console.log(Metadata.queries.join('\n'))
+export class Test3 {
+  @Query({
+    type: 'String'
+  })
+  query(){
+    return ''
+  }
+
+  @Mutation({
+    type: 'String',
+    args: {
+      input: 'MutationInput!'
+    }
+  })
+  mutation(){
+    return ''
+  }
+
+  @Subscription({
+    type: 'String'
+  })
+  subscription(){
+    return ''
+  }
+}
 
 Metadata.pubsub = new PubSub()
-BuildResolvers()
+console.log(GenerateTypes({ queries: false, mutations: false }))
+console.log(BuildResolvers())
+
