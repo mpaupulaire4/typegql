@@ -1,5 +1,15 @@
 import { Metadata, ActionType } from '../Metadata'
 
+interface SubscriptionDecoratorOptions {
+  name?: string
+  listen?: string | string[],
+  filter?: (payload: any, variables: any, context: any, info: any) => boolean | Promise<boolean>
+  type?: string
+  args?: {
+    [name: string]: string
+  }
+}
+
 export function Subscription({
   name,
   type,
@@ -26,15 +36,5 @@ export function Subscription({
       subscription = `${subscription}: ${type}`
       Metadata.subscriptions.push(subscription)
     }
-  }
-}
-
-interface SubscriptionDecoratorOptions {
-  name?: string
-  listen?: string | string[],
-  filter?: (payload: any, variables: any, context: any, info: any) => boolean | Promise<boolean>
-  type?: string
-  args?: {
-    [name: string]: string
   }
 }

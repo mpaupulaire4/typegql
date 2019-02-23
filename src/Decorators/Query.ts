@@ -1,5 +1,13 @@
 import { Metadata, ActionType } from '../Metadata'
 
+interface QueryDecoratorOptions {
+  name?: string
+  type?: string
+  args?: {
+    [name: string]: string
+  }
+}
+
 export function Query({name, type, args = {}}: QueryDecoratorOptions = {}) {
   return (target: any, methodName: string) => {
     Metadata.actions.push({
@@ -19,13 +27,5 @@ export function Query({name, type, args = {}}: QueryDecoratorOptions = {}) {
       query = `${query}: ${type}`
       Metadata.queries.push(query)
     }
-  }
-}
-
-interface QueryDecoratorOptions {
-  name?: string
-  type?: string
-  args?: {
-    [name: string]: string
   }
 }

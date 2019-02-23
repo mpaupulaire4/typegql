@@ -1,5 +1,13 @@
 import { Metadata, ActionType } from '../Metadata'
 
+interface MutationDecoratorOptions {
+  name?: string
+  type?: string
+  args?: {
+    [name: string]: string
+  }
+}
+
 export function Mutation({name, type, args = {}}: MutationDecoratorOptions = {}) {
   return (target: any, methodName: string) => {
     Metadata.actions.push({
@@ -22,10 +30,3 @@ export function Mutation({name, type, args = {}}: MutationDecoratorOptions = {})
   }
 }
 
-interface MutationDecoratorOptions {
-  name?: string
-  type?: string
-  args?: {
-    [name: string]: string
-  }
-}

@@ -42,7 +42,7 @@ export class Test2 {
   }
 }
 
-console.log(Metadata.subscriptions.join('\n'))
+console.log(Metadata.queries.join('\n'))
 
 Metadata.pubsub = new PubSub()
 BuildResolvers()

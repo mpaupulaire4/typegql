@@ -1,7 +1,7 @@
 
 export const ResolvesMetadataKey = Symbol("resolves")
 
-type ResolveDecoratorOptions = {
+interface ResolveDecoratorOptions {
   name: string
   dataloader?: boolean
   key?: (info: {oarent: any, args: any}) => string
