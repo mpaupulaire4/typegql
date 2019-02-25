@@ -9,7 +9,7 @@ export function Prop(options?: PropDecoratorOptions) {
     const isStatic = !!target.prototype
     let constructor = isStatic ? target : target.constructor
     const types: Map<string, string> = Reflect.getMetadata(PropsMetadataKey, constructor) || new Map()
-    const type = options || Reflect.getMetadata("design:type", target, methodName).name || 'NotSet'
+    const type = options || Reflect.getMetadata("design:type", target, methodName).name
 
     Reflect.defineMetadata(
       PropsMetadataKey,

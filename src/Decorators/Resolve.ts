@@ -18,6 +18,8 @@ export function Resolve({ type, args = {}, ...options }: ResolveDecoratorOptions
     const resolves: Map<string, any> = Reflect.getMetadata(ResolvesMetadataKey, constructor) || new Map()
     const name = options.name || methodName
     let prop;
+    const returntype = Reflect.getMetadata("design:returntype", target, methodName)
+    type = type || (returntype && returntype.name)
     if (type) {
       prop = `${name}`
       let keys = Object.keys(args)

@@ -5,12 +5,20 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon ./src/index.ts --exec ts-node",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
     "build": "tsc"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.6",
+    "@types/node": "^11.9.5",
+    "graphql": "^14.1.1",
+    "jest": "^24.1.0",
     "nodemon": "^1.18.10",
     "reflect-metadata": "^0.1.13",
+    "ts-jest": "^24.0.0",
     "ts-node": "^8.0.2",
+    "typedi": "^0.8.0",
     "typescript": "^3.3.3"
   },
   "dependencies": {
@@ -25,6 +33,18 @@
     "ext": "ts",
     "events": {
       "start": "node -e 'console.clear()'"
+    }
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "setupFiles": [
+      "./jest.setup.ts"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "<rootDir>/tsconfig.test.json"
+      }
     }
   }
 }

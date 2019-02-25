@@ -67,6 +67,6 @@ export class Test3 {
 }
 
 Metadata.pubsub = new PubSub()
-console.log(GenerateTypes({ queries: false, mutations: false }))
+console.log(GenerateTypes())
 console.log(BuildResolvers())
 

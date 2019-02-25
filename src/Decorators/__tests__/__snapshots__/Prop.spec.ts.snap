@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Prop Decorator should override allow for specifying a type 1`] = `
+Map {
+  "string" => "MyType!",
+}
+`;
+
+exports[`Prop Decorator should set metatdata to name of type constructor 1`] = `
+Map {
+  "string" => "String",
+  "number" => "Number",
+  "bool" => "Boolean",
+  "stringStatic" => "String",
+  "numberStatic" => "Number",
+  "boolStatic" => "Boolean",
+}
+`;
