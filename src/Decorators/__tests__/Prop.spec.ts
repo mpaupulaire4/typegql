@@ -6,7 +6,7 @@ describe('Prop Decorator', () => {
     expect(typeof Prop()).toBe('function')
   })
 
-  it('should set metatdata to name of type constructor', () => {
+  it('Metatdata should be a map of prop name to name of type constructor', () => {
     class Test {
       @Prop()
       string: string;
@@ -25,10 +25,10 @@ describe('Prop Decorator', () => {
     expect(Reflect.getMetadata(PropsMetadataKey, Test)).toMatchSnapshot()
   })
 
-  it('should override allow for specifying a type', () => {
+  it('Metadata should map prop to "MyType', () => {
     class Test {
       @Prop('MyType!')
-      string: string;
+      prop: string;
     }
     expect(Reflect.getMetadata(PropsMetadataKey, Test)).toMatchSnapshot()
   })

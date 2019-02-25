@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Prop Decorator should override allow for specifying a type 1`] = `
+exports[`Prop Decorator Metadata should map prop to "MyType 1`] = `
 Map {
-  "string" => "MyType!",
+  "prop" => "MyType!",
 }
 `;
 
-exports[`Prop Decorator should set metatdata to name of type constructor 1`] = `
+exports[`Prop Decorator Metatdata should be a map of prop name to name of type constructor 1`] = `
 Map {
   "string" => "String",
   "number" => "Number",
