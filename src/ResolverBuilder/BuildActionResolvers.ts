@@ -3,7 +3,7 @@ import { Metadata, ActionType } from '../Metadata'
 import { TypeResolver, RootResolver, SubscriptionResolver } from '../types'
 import Container from 'typedi';
 
-interface Resolver {
+export interface Resolver {
   [ActionType.Query]: TypeResolver
   [ActionType.Mutation]: TypeResolver
   [ActionType.Subscription]: SubscriptionResolver

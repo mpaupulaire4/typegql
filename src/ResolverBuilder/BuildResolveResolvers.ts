@@ -2,7 +2,7 @@ import Dataloader from 'dataloader'
 import { Metadata } from '../Metadata'
 import { TypeResolver } from '../types'
 
-interface Resolver {
+export interface Resolver {
   [type: string]: TypeResolver
 }
 

@@ -1,6 +1,6 @@
 import { ContainerInstance } from 'typedi'
 import { ResolverFn } from 'graphql-subscriptions'
-import * as Dataloader from 'dataloader'
+import Dataloader from 'dataloader'
 
 export interface RootResolver {
   [key: string]: RootResolverFn

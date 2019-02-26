@@ -9,7 +9,8 @@
       "target": "es5",
       "module": "commonjs",
       "moduleResolution": "node",
-      "outDir": "build",
+      "outDir": "dist",
+      "declaration": true,
       "esModuleInterop": true,
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
@@ -25,7 +26,8 @@
       "strictNullChecks": true
    },
    "include": [
-      "src/",
+      "src/index.ts",
+      "src/types.d.ts",
    ],
    "exclude": [
       "**/*.spec.ts"
