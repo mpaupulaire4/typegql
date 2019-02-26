@@ -1,5 +1,4 @@
 import { RootResolver, TypeResolver } from './types'
-import { PubSubEngine } from 'graphql-subscriptions'
 
 export class Metadata {
   static actions: Action[] = []
@@ -8,7 +7,6 @@ export class Metadata {
   static queries: string[] = []
   static mutations: string[] = []
   static subscriptions: string[] = []
-  static pubsub: PubSubEngine
 }
 
 interface BaseAction {

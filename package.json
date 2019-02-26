@@ -10,7 +10,9 @@
     "build": "tsc"
   },
   "devDependencies": {
+    "@types/graphql": "^14.0.7",
     "@types/jest": "^24.0.6",
+    "@types/lodash.merge": "^4.6.5",
     "@types/node": "^11.9.5",
     "graphql": "^14.1.1",
     "jest": "^24.1.0",
@@ -23,7 +25,9 @@
   },
   "dependencies": {
     "dataloader": "^1.4.0",
-    "graphql-subscriptions": "^1.0.0"
+    "graphql-subscriptions": "^1.0.0",
+    "graphql-tools": "^4.0.4",
+    "lodash.merge": "^4.6.1"
   },
   "peerDependencies": {
     "reflect-metadata": "^0.1.13",

@@ -1,6 +1,7 @@
-import { withFilter } from 'graphql-subscriptions'
+import { withFilter, PubSubEngine } from 'graphql-subscriptions'
 import { Metadata, ActionType } from '../Metadata'
 import { TypeResolver, RootResolver, SubscriptionResolver } from '../types'
+import Container from 'typedi';
 
 interface Resolver {
   [ActionType.Query]: TypeResolver
@@ -8,7 +9,11 @@ interface Resolver {
   [ActionType.Subscription]: SubscriptionResolver
 }
 
-export function BuildActionResolvers(base: any = {}): Resolver {
+export type ActionBuilderOptions = {
+  PubSub?: PubSubEngine
+}
+
+export function BuildActionResolvers({ PubSub }: ActionBuilderOptions = {}): Resolver {
   return Metadata.actions.reduce((resolver, action) => {
     resolver[action.type] = resolver[action.type] || {}
     switch(action.type) {
@@ -18,6 +23,7 @@ export function BuildActionResolvers(base: any = {}): Resolver {
           resolver[action.type][action.name] = (_, args, context, info) => action.target[action.methodName](args, context, info)
         } else {
           resolver[action.type][action.name] = (_, args, context, info) => {
+            context.container = context.container || Container
             const Controller = context.container.get<RootResolver>(action.target.constructor)
             return Controller[action.methodName](args, context, info)
           }
@@ -25,9 +31,9 @@ export function BuildActionResolvers(base: any = {}): Resolver {
         return resolver
       }
       case ActionType.Subscription: {
-        if (!Metadata.pubsub) throw Error('You must specify a PubSub Instance to use Subscriptions')
+        if (!PubSub) throw Error('You must specify a PubSub Instance to use Subscriptions')
         const subscribe = withFilter(
-          () => Metadata.pubsub.asyncIterator(action.listen),
+          () => PubSub.asyncIterator(action.listen),
           action.filter
         )
         if (action.static) {
@@ -39,6 +45,7 @@ export function BuildActionResolvers(base: any = {}): Resolver {
           resolver[action.type][action.name] = {
             subscribe,
             resolve: (payload, args, context, info) => {
+              context.container = context.container || Container
               const Controller = context.container.get<TypeResolver>(action.target.constructor)
               return Controller[action.methodName](payload, args, context, info)
             }
@@ -49,5 +56,5 @@ export function BuildActionResolvers(base: any = {}): Resolver {
       default:
         return resolver
     }
-  }, base as Resolver)
+  }, {} as Resolver)
 }

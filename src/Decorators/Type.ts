@@ -4,9 +4,9 @@ import { PropsMetadataKey } from './Prop'
 
 type TypeDecoratorOptions = string
 
-export function Type(options: TypeDecoratorOptions) {
+export function Type(options?: TypeDecoratorOptions) {
   return (target: any) => {
-    const name = options
+    const name = options || target.name
     const types: Map<string, string> = Reflect.getMetadata(PropsMetadataKey, target)
     const propDefs = Metadata.types.get(name) || []
     if (types) {

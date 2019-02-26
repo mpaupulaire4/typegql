@@ -1,4 +1,4 @@
-import * as Dataloader from 'dataloader'
+import Dataloader from 'dataloader'
 import { Metadata } from '../Metadata'
 import { TypeResolver } from '../types'
 
@@ -6,7 +6,7 @@ interface Resolver {
   [type: string]: TypeResolver
 }
 
-export function BuildResolveResolvers(base: any = {}): Resolver {
+export function BuildResolveResolvers(): Resolver {
   return Metadata.resolves.reduce((resolvers, {
     parent,
     target,
@@ -29,6 +29,7 @@ export function BuildResolveResolvers(base: any = {}): Resolver {
       const fn = resolvers[parent][name]
       resolvers[parent][name] = (data, args, context, info) => {
         const loaderKey = `${parent}:${name}`
+        context.dataloaders = context.dataloaders || {}
         if (!context.dataloaders[loaderKey]) {
           context.dataloaders[loaderKey] = new Dataloader(async (keys) => {
             return fn(
@@ -45,5 +46,5 @@ export function BuildResolveResolvers(base: any = {}): Resolver {
       }
     }
     return resolvers
-  }, base as Resolver)
+  }, {} as Resolver)
 }

@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Server Setup: users query should return "bob", "john", and "jane" 1`] = `
+Object {
+  "data": Object {
+    "users": Array [
+      Object {
+        "bestFriend": Object {
+          "name": "jane",
+        },
+        "friends": Array [
+          Object {
+            "name": "bob",
+          },
+          Object {
+            "name": "john",
+          },
+        ],
+        "id": 1,
+        "name": "bob",
+      },
+      Object {
+        "bestFriend": Object {
+          "name": "jane",
+        },
+        "friends": Array [
+          Object {
+            "name": "bob",
+          },
+          Object {
+            "name": "john",
+          },
+        ],
+        "id": 2,
+        "name": "john",
+      },
+      Object {
+        "bestFriend": Object {
+          "name": "jane",
+        },
+        "friends": Array [
+          Object {
+            "name": "bob",
+          },
+          Object {
+            "name": "john",
+          },
+        ],
+        "id": 2,
+        "name": "jane",
+      },
+    ],
+  },
+}
+`;
