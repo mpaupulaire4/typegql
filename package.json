@@ -1,7 +1,7 @@
 {
-  "name": "typegql",
+  "name": "@mpaupulaire/typegql",
   "version": "1.0.0",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "license": "MIT",
   "keywords": [
     "typescript",
@@ -9,11 +9,14 @@
     "framework",
     "conroller"
   ],
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "nodemon ./src/index.ts --exec ts-node",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
-    "build": "tsc"
+    "build": "tsc",
+    "prepare": "npm run build"
   },
   "devDependencies": {
     "@types/graphql": "^14.0.7",
@@ -22,10 +25,8 @@
     "@types/node": "^11.9.5",
     "graphql": "^14.1.1",
     "jest": "^24.1.0",
-    "nodemon": "^1.18.10",
     "reflect-metadata": "^0.1.13",
     "ts-jest": "^24.0.0",
-    "ts-node": "^8.0.2",
     "typedi": "^0.8.0",
     "typescript": "^3.3.3"
   },
@@ -56,5 +57,15 @@
         "tsConfig": "<rootDir>/tsconfig.test.json"
       }
     }
-  }
+  },
+  "description": "A set of decorators and utilities that allow you to create maintainable, scalable, extensible, and declarative GraphQL-based server applications",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mpaupulaire4/typegql.git"
+  },
+  "author": "Michel Paupulaire",
+  "bugs": {
+    "url": "https://github.com/mpaupulaire4/typegql/issues"
+  },
+  "homepage": "https://github.com/mpaupulaire4/typegql#readme"
 }
