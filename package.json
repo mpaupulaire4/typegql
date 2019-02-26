@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "license": "MIT",
+  "keywords": [
+    "typescript",
+    "GraphQL",
+    "framework",
+    "conroller"
+  ],
   "scripts": {
     "dev": "nodemon ./src/index.ts --exec ts-node",
     "test": "jest --coverage",
