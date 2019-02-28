@@ -6,13 +6,11 @@ import {
   Query,
   Subscription,
   Mutation,
-  BuildResolvers
+  makeExecutableSchema
 } from '../'
 import { graphql } from 'graphql'
-import { makeExecutableSchema } from 'graphql-tools'
 import { Container } from 'typedi'
 import { PubSub } from 'graphql-subscriptions';
-import { GenerateTypes } from '../TypeGenerator';
 
 @Type()
 export class User {
@@ -79,8 +77,7 @@ describe('Server Setup:', () => {
 
   it('should build', async () => {
     const schema = makeExecutableSchema({
-      typeDefs: GenerateTypes(),
-      resolvers: BuildResolvers({}, { PubSub: new PubSub() })
+      PubSub: new PubSub()
     })
     runQuery = (query) => graphql({
       schema,

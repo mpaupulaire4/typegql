@@ -3,16 +3,20 @@ import { BuildResolveResolvers } from './BuildResolveResolvers'
 import merge from 'lodash.merge'
 import { SubscriptionResolver, TypeResolver } from '../types';
 
-export interface Resolver {
+interface Resolver {
   [type: string]: TypeResolver | SubscriptionResolver
 }
 
-export function BuildResolvers(customResolvers = {}, options: ActionBuilderOptions = {}): Resolver {
+export interface ResolverBuilderOptions extends ActionBuilderOptions {
+
+}
+
+export function BuildResolvers(options: ResolverBuilderOptions = {}, baseResolvers: {} = {}): Resolver {
   return merge(
     {},
-    customResolvers,
     BuildActionResolvers(options),
     BuildResolveResolvers(),
+    baseResolvers,
   )
 }
 

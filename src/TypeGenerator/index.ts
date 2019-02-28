@@ -1,6 +1,6 @@
 import { Metadata } from '../Metadata'
 
-type GenerationOptions = {
+export type TypeGenerationOptions = {
   queries?: boolean
   mutations?: boolean
   subscriptions?: boolean
@@ -12,7 +12,7 @@ export function GenerateTypes({
   mutations = true,
   subscriptions = true,
   types = true,
-}: GenerationOptions = {}) {
+}: TypeGenerationOptions = {}) {
   let gql = []
   if (types) {
     for (let [type, props] of Metadata.types.entries()) {
