@@ -1,5 +1,6 @@
 import { Metadata } from '../Metadata'
 import fs from 'fs'
+import { normalize } from 'path'
 import { sync } from 'glob'
 
 export type TypeGenerationOptions = {
@@ -44,7 +45,7 @@ export function GenerateTypes({
   }
 
   for (let pattern of schemas) {
-    const matches = sync(pattern)
+    const matches = sync(normalize(pattern))
     for (let match of matches) {
       gql.push(fs.readFileSync(match).toString())
     }

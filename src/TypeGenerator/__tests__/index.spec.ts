@@ -81,7 +81,7 @@ describe('Type Generator', () => {
   it('should include schema files', () => {
     expect(GenerateTypes({
       schemas: [
-        '**/*.type-generator.gql'
+        'src/TypeGenerator/**/*.type-generator.gql'
       ]
     })).toMatchSnapshot()
   })
