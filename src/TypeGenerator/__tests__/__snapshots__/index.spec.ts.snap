@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Type Generator extend: true  should extend Query, Mutation, Subscription 1`] = `
+"type User {
+  id: Int
+  name: String
+  number: Int
+}
+extend type Query {
+  query: [User!]!
+}
+extend type Mutation {
+  mutation: String
+}
+extend type Subscription {
+  subscription: String
+}"
+`;
+
+exports[`Type Generator should exclude Mutations 1`] = `
+"type User {
+  id: Int
+  name: String
+  number: Int
+}
+type Query {
+  query: [User!]!
+}
+type Subscription {
+  subscription: String
+}"
+`;
+
+exports[`Type Generator should exclude Query 1`] = `
+"type User {
+  id: Int
+  name: String
+  number: Int
+}
+type Mutation {
+  mutation: String
+}
+type Subscription {
+  subscription: String
+}"
+`;
+
+exports[`Type Generator should exclude Subscriptions 1`] = `
+"type User {
+  id: Int
+  name: String
+  number: Int
+}
+type Query {
+  query: [User!]!
+}
+type Mutation {
+  mutation: String
+}"
+`;
+
+exports[`Type Generator should extend Query and User 1`] = `
+"extend type User {
+  id: Int
+  name: String
+  number: Int
+}
+extend type Query {
+  query: [User!]!
+}
+type Mutation {
+  mutation: String
+}
+type Subscription {
+  subscription: String
+}"
+`;
+
+exports[`Type Generator should generate type strings from decorators 1`] = `
+"type User {
+  id: Int
+  name: String
+  number: Int
+}
+type Query {
+  query: [User!]!
+}
+type Mutation {
+  mutation: String
+}
+type Subscription {
+  subscription: String
+}"
+`;
+
+exports[`Type Generator should include schema files 1`] = `
+"type User {
+  id: Int
+  name: String
+  number: Int
+}
+type Query {
+  query: [User!]!
+}
+type Mutation {
+  mutation: String
+}
+type Subscription {
+  subscription: String
+}
+input TestInput {
+  test: Int!
+}
+input TestInput2 {
+  test: Int!
+}"
+`;
+
+exports[`Type Generator should only include root types 1`] = `
+"type Query {
+  query: [User!]!
+}
+type Mutation {
+  mutation: String
+}
+type Subscription {
+  subscription: String
+}"
+`;

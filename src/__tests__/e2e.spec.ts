@@ -77,7 +77,9 @@ describe('Server Setup:', () => {
 
   it('should build', async () => {
     const schema = makeExecutableSchema({
-      PubSub: new PubSub()
+      resolverBuilderOptions: {
+        PubSub: new PubSub()
+      }
     })
     runQuery = (query) => graphql({
       schema,

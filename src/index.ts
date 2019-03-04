@@ -5,16 +5,17 @@ import { ResolverBuilderOptions, BuildResolvers } from './ResolverBuilder';
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 
-interface IMakeExecutableSchemaOptions extends Omit<IExecutableSchemaDefinition, "typeDefs">, TypeGenerationOptions, ResolverBuilderOptions {
+interface IMakeExecutableSchemaOptions extends Omit<IExecutableSchemaDefinition, "typeDefs"> {
   typeDefs?: ITypeDefinitions
-  schemas?: string[]
+  typeGeneratorOptions?: TypeGenerationOptions
+  resolverBuilderOptions?: ResolverBuilderOptions
 }
 
 export function makeExecutableSchema({
-  schemas,
   typeDefs = [],
   resolvers = [],
-  PubSub,
+  typeGeneratorOptions,
+  resolverBuilderOptions,
   ...options
 }: IMakeExecutableSchemaOptions) {
   if (!Array.isArray(typeDefs)) {
@@ -24,8 +25,8 @@ export function makeExecutableSchema({
     resolvers = [resolvers]
   }
   return make({
-    typeDefs: typeDefs.concat(GenerateTypes(options)),
-    resolvers: resolvers.concat(BuildResolvers({ PubSub })),
+    typeDefs: typeDefs.concat(GenerateTypes(typeGeneratorOptions)),
+    resolvers: resolvers.concat(BuildResolvers(resolverBuilderOptions)),
     ...options
   })
 }
