@@ -22,7 +22,7 @@ export function Mutation({name, type, args = {}}: MutationDecoratorOptions = {})
       let keys = Object.keys(args)
       if (keys.length) {
         keys = keys.map((key) => `${key}: ${args[key]}`)
-        mutation = `${mutation}(\n\t\t${keys.join('\n\t\t')}\n\t)`
+        mutation = `${mutation}(\n    ${keys.join('\n    ')}\n  )`
       }
       mutation = `${mutation}: ${type}`
       Metadata.mutations.push(mutation)

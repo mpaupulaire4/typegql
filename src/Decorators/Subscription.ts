@@ -14,6 +14,7 @@ export function Subscription({
   name,
   type,
   args = {},
+  filter = () => true,
   ...options
 }: SubscriptionDecoratorOptions = {}) {
   return (target: any, methodName: string) => {
@@ -23,7 +24,7 @@ export function Subscription({
       methodName,
       name: name || methodName,
       static: !!target.prototype,
-      filter: options.filter || (() => true),
+      filter,
       listen: options.listen || name || methodName,
     })
     if (type) {
@@ -31,7 +32,7 @@ export function Subscription({
       let keys = Object.keys(args)
       if (keys.length) {
         keys = keys.map((key) => `${key}: ${args[key]}`)
-        subscription = `${subscription}(\n\t\t${keys.join('\n\t\t')}\n\t)`
+        subscription = `${subscription}(\n    ${keys.join('\n    ')}\n  )`
       }
       subscription = `${subscription}: ${type}`
       Metadata.subscriptions.push(subscription)

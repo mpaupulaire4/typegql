@@ -22,7 +22,7 @@ export function Query({name, type, args = {}}: QueryDecoratorOptions = {}) {
       let keys = Object.keys(args)
       if (keys.length) {
         keys = keys.map((key) => `${key}: ${args[key]}`)
-        query = `${query}(\n\t\t${keys.join('\n\t\t')}\n\t)`
+        query = `${query}(\n    ${keys.join('\n    ')}\n  )`
       }
       query = `${query}: ${type}`
       Metadata.queries.push(query)
