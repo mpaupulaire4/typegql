@@ -6,14 +6,27 @@ Object {
     "users": Array [
       Object {
         "bestFriend": Object {
-          "name": "jane",
+          "id": 2,
+          "name": "john",
+        },
+        "expensiveBestFriend": Object {
+          "expensiveBestFriend": Object {
+            "expensiveBestFriend": Object {
+              "id": 1,
+              "name": "bob",
+            },
+          },
+          "id": 2,
+          "name": "john",
         },
         "friends": Array [
           Object {
-            "name": "bob",
+            "id": 2,
+            "name": "john",
           },
           Object {
-            "name": "john",
+            "id": 3,
+            "name": "jane",
           },
         ],
         "id": 1,
@@ -21,14 +34,27 @@ Object {
       },
       Object {
         "bestFriend": Object {
+          "id": 3,
+          "name": "jane",
+        },
+        "expensiveBestFriend": Object {
+          "expensiveBestFriend": Object {
+            "expensiveBestFriend": Object {
+              "id": 2,
+              "name": "john",
+            },
+          },
+          "id": 3,
           "name": "jane",
         },
         "friends": Array [
           Object {
-            "name": "bob",
+            "id": 3,
+            "name": "jane",
           },
           Object {
-            "name": "john",
+            "id": 1,
+            "name": "bob",
           },
         ],
         "id": 2,
@@ -36,17 +62,30 @@ Object {
       },
       Object {
         "bestFriend": Object {
-          "name": "jane",
+          "id": 1,
+          "name": "bob",
+        },
+        "expensiveBestFriend": Object {
+          "expensiveBestFriend": Object {
+            "expensiveBestFriend": Object {
+              "id": 3,
+              "name": "jane",
+            },
+          },
+          "id": 1,
+          "name": "bob",
         },
         "friends": Array [
           Object {
+            "id": 1,
             "name": "bob",
           },
           Object {
+            "id": 2,
             "name": "john",
           },
         ],
-        "id": 2,
+        "id": 3,
         "name": "jane",
       },
     ],

@@ -1,3 +1,4 @@
 export function Controller() {
-  return (target: any) => undefined
+  // @ts-ignore
+  return (target: any) =>  undefined
 }

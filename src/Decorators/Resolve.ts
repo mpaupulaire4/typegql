@@ -4,7 +4,7 @@ export const ResolvesMetadataKey = Symbol("resolves")
 interface ResolveDecoratorOptions {
   name?: string
   dataloader?: boolean
-  key?: (info: {oarent: any, args: any}) => string
+  key?: (info: {parent: any, args: any}) => string
   type?: string
   args?: {
     [name: string]: string

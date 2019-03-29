@@ -1,6 +1,6 @@
 import Dataloader from 'dataloader'
 import { Metadata } from '../Metadata'
-import { TypeResolver } from '../types'
+import { TypeResolver, Context } from '../types'
 
 export interface Resolver {
   [type: string]: TypeResolver
@@ -27,22 +27,22 @@ export function BuildResolveResolvers(): Resolver {
     }
     if (dataloader) {
       const fn = resolvers[parent][name]
-      resolvers[parent][name] = (data, args, context, info) => {
-        const loaderKey = `${parent}:${name}`
-        context.dataloaders = context.dataloaders || {}
-        if (!context.dataloaders[loaderKey]) {
-          context.dataloaders[loaderKey] = new Dataloader(async (keys) => {
+      class Loader extends Dataloader<{ parent: any, args: any, context: Context, info: any}, any> {
+        constructor() {
+          super(async (keys) => {
             return fn(
               keys.map(({ parent }) => parent),
               keys.map(({ args }) => args),
-              context,
-              info
+              keys[0].context,
+              keys[0].info,
             )
           }, {
             cacheKeyFn: key || JSON.stringify,
           })
         }
-        return context.dataloaders[loaderKey].load({ parent: data, args })
+      }
+      resolvers[parent][name] = (data, args, context, info) => {
+        return context.container.get(Loader).load({ parent: data, args, context, info })
       }
     }
     return resolvers

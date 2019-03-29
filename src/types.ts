@@ -1,6 +1,5 @@
 import { ContainerInstance } from 'typedi'
 import { ResolverFn } from 'graphql-subscriptions'
-import Dataloader from 'dataloader'
 
 export interface RootResolver {
   [key: string]: RootResolverFn
@@ -25,13 +24,4 @@ export type TypeResolverFn = (parent: any, args: any, context: Context, info: an
 
 export interface Context {
   container: ContainerInstance
-  dataloaders: {
-    [key: string]: Dataloader<
-      {
-        parent: any,
-        args: any,
-      },
-      any
-    >,
-  }
 }

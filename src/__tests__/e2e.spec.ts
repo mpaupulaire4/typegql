@@ -11,6 +11,7 @@ import {
 import { graphql } from 'graphql'
 import { Container } from 'typedi'
 import { PubSub } from 'graphql-subscriptions';
+import { Controller } from '../Decorators';
 
 @Type()
 export class User {
@@ -30,25 +31,53 @@ export class User {
 
 let user1: User = new User(1, 'bob', 123);
 let user2: User = new User(2, 'john', 456);
-let user3: User = new User(2, 'jane', 789);
+let user3: User = new User(3, 'jane', 789);
+
+const bestFriendsMap =  {
+  [user1.id]: user2,
+  [user2.id]: user3,
+  [user3.id]: user1,
+}
+
+const friendsMap =  {
+  [user1.id]: [user2, user3],
+  [user2.id]: [user3, user1],
+  [user3.id]: [user1, user2],
+}
 
 @Type('User')
 export class UserResolver {
   @Resolve({
     type: '[User!]!',
   })
-  friends(): User[] {
-    return [user1, user2]
+  friends(user: User) {
+    return friendsMap[user.id]
   }
 
   @Resolve({
     type: 'User',
+    dataloader: true,
+    key: ({ parent }) => parent.id,
   })
-  bestFriend(): User {
-    return user3
+  bestFriend(users: User[]) {
+    return users.map(user => bestFriendsMap[user.id])
+  }
+
+  @Resolve({
+    type: 'User',
+    dataloader: true,
+    key: ({ parent }) => parent.id,
+  })
+  expensiveBestFriend(users: User[]) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(users.map(user => bestFriendsMap[user.id]))
+      }, 1000);
+    })
   }
 }
 
+@Controller()
 export class Test3 {
   @Query({
     type: '[User!]!'
@@ -91,7 +120,30 @@ describe('Server Setup:', () => {
   })
 
   it('users query should return "bob", "john", and "jane"', async () => {
-    const res = await runQuery('{ users { id name bestFriend { name } friends { name } } }')
+    const res = await runQuery(`{
+      users {
+        id
+        name
+        expensiveBestFriend {
+          id
+          name
+          expensiveBestFriend {
+            expensiveBestFriend {
+              id
+              name
+            }
+          }
+        }
+        bestFriend {
+          id
+          name
+        }
+        friends {
+          id
+          name
+        }
+      }
+    }`)
     expect(res).toMatchSnapshot()
   })
 
